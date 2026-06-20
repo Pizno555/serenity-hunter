@@ -1,0 +1,10 @@
+interface:
+  display_name: "Serenity Hunter"
+  short_description: "Turns investment agents into supply-chain bottleneck hunters"
+  brand_color: "#111827"
+  default_prompt: "Use serenity-hunter to deeply research a market theme, map the value chain, find scarce layers, rank research priorities, explain the evidence, and say what could prove the view wrong."
+policy:
+  allow_implicit_invocation: true
+  remote_inline_execution: forbid
+dependencies:
+  tools: []

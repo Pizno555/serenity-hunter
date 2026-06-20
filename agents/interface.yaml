@@ -1,0 +1,60 @@
+interface:
+  display_name: "Serenity Hunter"
+  short_description: "Supply-chain bottleneck hunter"
+  brand_color: "#111827"
+  default_prompt: "Map value chain, find scarce layers, rank priorities."
+policy:
+  allow_implicit_invocation: true
+dependencies:
+  tools: []
+compatibility:
+  canonical_format: "agent-skill-v1"
+  adapter_targets: ["openai", "claude"]
+  activation: { mode: "implicit" }
+  execution: { context: "inline", shell: "bash" }
+  trust: { source_tier: "local", remote_inline_execution: "forbid", remote_metadata_policy: "metadata-only" }
+  degradation:
+    openai: {}
+    claude: {}
+skill_ir:
+  recurring_job: "Translate investment themes into ranked research priorities via supply-chain bottleneck analysis"
+  inputs:
+    - "market (US, HK, A-share, Taiwan, Japan, Korea, Europe)"
+    - "theme (AI infra, semiconductors, CPO, packaging, robotics, power, etc.)"
+    - "time window (3-12 months default)"
+    - "mode (theme scan, single-company challenge, comparison, partner, learning)"
+  outputs:
+    - "scarce-layer ranking"
+    - "company ranking with evidence grades"
+    - "what could go wrong per top candidate"
+    - "next research actions"
+  workflow_steps:
+    - "scope: infer market, theme, time window"
+    - "system_change: demand wave -> physical constraint"
+    - "value_chain: 8-layer checklist + 7-point self-check + completeness declaration"
+    - "scarce_layer: 9-indicator fact+interval extraction, trigger rules L1-L10, falsification test (see references/scarcity-assessment.md)"
+    - "company_universe: 6 discovery methods + 4 hard gates + 5-class classification (see references/company-universe-build.md)"
+    - "evidence: 35+ sources for deep scans, 7-Tier search priority, 4-level grading"
+    - "rank: scorecard scoring, layer and company rankings separate"
+    - "failure_conditions: what could prove the view wrong"
+    - "next_move: concrete verification actions"
+  failure_modes:
+    - "popular_area_not_downgraded: answer lacks a downgraded obvious pick"
+    - "evidence_not_graded: claims lack strength labels"
+    - "layer_ranking_skipped: jumps straight to company list"
+    - "single_source_top_candidate: top pick rests on one weak source"
+    - "fabricated_source: invented filing or announcement"
+    - "candidate_pool_too_narrow: fewer than 4 companies per scarce layer"
+    - "self_check_skipped: 7-point completeness check not executed"
+    - "rating_system_mismatch: using non-scorecard ratings (ALPHA/BETA etc.)"
+  eval_plans:
+    trigger: "scripts/trigger_eval.py against evals/test-cases.md"
+    behavior: "evals/test-cases.md Tests 1-6"
+    blind_holdout: "evals/blind_holdout.md"
+    adversarial: "evals/adversarial_holdout.md"
+    route_confusion: "evals/route_confusion.md"
+    holdout_runner: "scripts/holdout_eval.py"
+  trust_boundary:
+    research_support_only: true
+    user_makes_trading_decisions: true
+    prohibited: ["guaranteed_returns", "buy_sell_commands", "rumor_recs", "non_public_info", "invented_data"]

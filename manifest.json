@@ -1,0 +1,97 @@
+{
+  "name": "serenity-hunter",
+  "version": "2.0.0",
+  "owner": "user",
+  "status": "active",
+  "maturity_tier": "governed",
+  "lifecycle_stage": "governed",
+  "context_budget_tier": "governed",
+  "review_cadence": "quarterly",
+  "updated_at": "2026-06-19",
+  "description": "Supply-chain bottleneck hunter for investment research. Translates market narratives into physical system constraints, maps the full value chain, identifies scarce layers, and ranks public companies by research priority with graded evidence.",
+  "governance": {
+    "archetype": "governed",
+    "rationale": "Investment research skill with public methodology claims, scoring scripts that influence financial decisions, and risk-sensitive output.",
+    "reviewer": "user",
+    "trust_report": "reports/trust_report.md",
+    "quality_scorecard": "reports/output_quality_scorecard.md"
+  },
+  "input_files": {
+    "type": "file-backed fixture",
+    "description": "Methodology files in references/ and assets/ are file-backed fixtures. Changes require explicit review.",
+    "frozen": [
+      "references/public-profile-and-evaluation.md"
+    ],
+    "methodology_enhanced": [
+      "references/deep-research-workflow.md (v2.0.0: split into 3 files, added 7-point self-check + completeness declaration)",
+      "references/scarcity-assessment.md (v2.0.0: new file, Step 4 extracted, added 9-indicator + trigger rules + falsification)",
+      "references/company-universe-build.md (v2.0.0: new file, Step 5 extracted, added 6 methods + 4 hard gates)",
+      "references/serenity-dialogue-protocol.md (v2.0.0: added Q12 valuation-gap question + partner-mode exit condition)",
+      "assets/thesis-template.md (v2.0.0: added valuation snapshot field)",
+      "assets/thesis-template-a-share.md (v2.0.0: new file, A-share specific)"
+    ],
+    "guarded_additions": [
+      "references/evidence-ladder.md (v2.0.0 guard + 7-Tier search priority appended)",
+      "references/output-style-and-language.md (v2.0.0 guard appended)"
+    ],
+    "unchanged": [
+      "references/market-source-playbook.md",
+      "references/risk-and-compliance.md",
+      "references/research-sources.md",
+      "assets/bottleneck-scorecard.json",
+      "assets/research-prompt-pack.md",
+      "assets/serenity-report-template.html (v2.0.0: new, user-contributed)",
+      "scripts/serenity_scorecard.py",
+      "scripts/validate_skill.py"
+    ]
+  },
+  "output_contract": {
+    "type": "research_priority_ranking",
+    "required_sections": [
+      "scarce_layer_ranking",
+      "company_ranking_with_evidence",
+      "what_could_go_wrong",
+      "next_research_actions"
+    ],
+    "evidence_grading": "strong/medium/weak/needs_checking",
+    "language": "user_language_with_chinese_default_for_a_share",
+    "citation_density": "max_3_inline_per_paragraph_full_table_at_end"
+  },
+  "boundaries": {
+    "provides": [
+      "ranked research priorities",
+      "evidence and uncertainty",
+      "value-chain reasoning",
+      "risk and downside checks",
+      "next verification actions"
+    ],
+    "does_not_provide": [
+      "guaranteed return language",
+      "direct buy/sell commands",
+      "rumor-based recommendations",
+      "material non-public information",
+      "invented prices, filings, customers, or contracts"
+    ]
+  },
+  "rollback_boundary": {
+    "description": "Rollback to v1.0.0 restores original 22-file structure without governed gates, reports, or guard additions.",
+    "method": "git revert to pre-v2.0.0 commit",
+    "data_migration": "none",
+    "breaking_changes": "none — v2.0.0 is additive"
+  },
+  "remote_inline_execution": "forbid",
+  "factory_components": ["evals", "reports"],
+  "gates": [
+    "scripts/governance_check.py",
+    "scripts/trust_check.py",
+    "scripts/resource_boundary_check.py",
+    "scripts/claim_guard.py",
+    "scripts/trigger_eval.py",
+    "scripts/cross_packager.py",
+    "scripts/holdout_eval.py"
+  ],
+  "missing_evidence": [
+    "blind_holdout: BH1/BH2/BH4 keyword miss — semantic routing is AI-layer capability, not scriptable",
+    "judge_backed_holdout: not yet implemented (requires second model)"
+  ]
+}

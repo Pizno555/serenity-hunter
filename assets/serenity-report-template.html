@@ -1,0 +1,1101 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{产业链名称}}产业链深度研究 | {{日期}} | Serenity方法论</title>
+<style>
+  :root {
+    --bg: #f8f9fc; --card: #ffffff; --text: #1a1a2e; --muted: #555;
+    --accent: #c0392b; --blue: #2980b9; --green: #27ae60;
+    --orange: #e67e22; --gold: #d4a017; --purple: #8e44ad;
+    --border: #e0e0e0; --shadow: 0 2px 16px rgba(0,0,0,.06);
+    --hero-bg: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    --tag-a1: #c0392b; --tag-a2: #e67e22; --tag-a3: #f39c12;
+    --tag-b1: #2980b9; --tag-b2: #27ae60; --tag-b3: #95a5a6;
+    /* 语义背景色 */
+    --red-bg: #fff5f5; --orange-bg: #fffaf0; --gold-bg: #fffbeb;
+    --green-bg: #f0fff4; --blue-bg: #f0f7ff; --gray-bg: #fafafa;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+    background: var(--bg); color: var(--text); line-height: 1.75; font-size: 15px;
+  }
+
+  /* ========== Hero ========== */
+  .hero {
+    background: var(--hero-bg); color: #fff;
+    padding: 56px 32px 44px; text-align: center;
+    border-bottom: 4px solid var(--accent);
+  }
+  .hero h1 { font-size: 32px; font-weight: 800; margin-bottom: 8px; }
+  .hero .sub { font-size: 16px; opacity: .85; margin-bottom: 16px; }
+  .hero .meta { font-size: 13px; opacity: .65; }
+  .hero .revision {
+    display: inline-block; background: var(--accent); color: #fff;
+    font-size: 12px; padding: 3px 12px; border-radius: 12px; margin-top: 10px;
+  }
+
+  .container { max-width: 1200px; margin: 0 auto; padding: 24px; }
+
+  /* ========== TOC 目录 ========== */
+  .toc {
+    background: var(--card); border-radius: 12px; padding: 24px 28px;
+    margin-bottom: 32px; box-shadow: var(--shadow); border: 1px solid var(--border);
+  }
+  .toc h3 { font-size: 17px; margin-bottom: 14px; color: var(--accent); }
+  .toc ol { padding-left: 20px; columns: 2; column-gap: 40px; }
+  .toc li { margin: 5px 0; font-size: 14px; break-inside: avoid; }
+  .toc a { color: var(--blue); text-decoration: none; }
+  .toc a:hover { text-decoration: underline; }
+
+  /* ========== Section ========== */
+  .section { margin-bottom: 40px; }
+  .section-title {
+    font-size: 22px; font-weight: 700; color: var(--text);
+    border-left: 4px solid var(--accent); padding-left: 14px; margin-bottom: 20px;
+  }
+  .section-subtitle {
+    font-size: 17px; font-weight: 700; color: var(--accent);
+    margin: 24px 0 14px; padding: 8px 12px; background: #f8f9fa; border-radius: 6px;
+  }
+  .section-desc { color: var(--muted); font-size: 14px; margin-bottom: 16px; line-height: 1.85; }
+
+  /* ========== Card ========== */
+  .card {
+    background: var(--card); border-radius: 12px; padding: 24px;
+    margin-bottom: 20px; box-shadow: var(--shadow); border: 1px solid var(--border);
+  }
+  .card-warn { border-left: 4px solid var(--accent); background: var(--red-bg); }
+  .card-info { border-left: 4px solid var(--blue); background: var(--blue-bg); }
+  .card-note { border-left: 4px solid var(--gold); background: var(--gold-bg); }
+  .card-green { border-left: 4px solid var(--green); background: var(--green-bg); }
+
+  /* ========== Insight Boxes ========== */
+  .insight {
+    padding: 16px 20px; border-radius: 0 8px 8px 0; margin: 16px 0; line-height: 1.9;
+    font-size: 14px;
+  }
+  .insight-red { background: var(--red-bg); border-left: 4px solid var(--accent); }
+  .insight-red strong { color: var(--accent); }
+  .insight-blue { background: var(--blue-bg); border-left: 4px solid var(--blue); }
+  .insight-green { background: var(--green-bg); border-left: 4px solid var(--green); }
+  .insight-orange { background: var(--orange-bg); border-left: 4px solid var(--orange); }
+  .insight-gold { background: var(--gold-bg); border-left: 4px solid var(--gold); }
+
+  /* ========== Metric Cards ========== */
+  .metric-row {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px; margin: 20px 0;
+  }
+  .metric-card {
+    background: var(--card); border-radius: 12px; padding: 20px;
+    box-shadow: var(--shadow); text-align: center; border-top: 3px solid var(--blue);
+  }
+  .metric-card.scarce { border-top-color: var(--accent); }
+  .metric-card .num { font-size: 28px; font-weight: 800; color: var(--accent); }
+  .metric-card .num.blue { color: var(--blue); }
+  .metric-card .num.green { color: var(--green); }
+  .metric-card .label { font-size: 12px; color: var(--muted); margin-top: 6px; }
+
+  /* ========== Priority Cards ========== */
+  .priority-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px; margin: 20px 0;
+  }
+  .priority-card {
+    background: var(--card); border-radius: 12px; padding: 22px;
+    box-shadow: var(--shadow); border-top: 4px solid var(--accent);
+  }
+  .priority-card.c1 { border-top-color: var(--accent); }
+  .priority-card.c2 { border-top-color: var(--orange); }
+  .priority-card.c3 { border-top-color: var(--green); }
+  .priority-card .rank {
+    display: inline-block; font-size: 11px; font-weight: 700; padding: 3px 10px;
+    border-radius: 20px; margin-bottom: 10px; color: #fff;
+  }
+  .c1 .rank { background: var(--accent); }
+  .c2 .rank { background: var(--orange); }
+  .c3 .rank { background: var(--green); }
+  .priority-card h4 { margin-top: 8px; font-size: 16px; font-weight: 700; }
+  .priority-card p { color: var(--muted); font-size: 13px; margin-top: 8px; line-height: 1.6; }
+
+  /* ========== Scarce Tier Cards ========== */
+  .scarce-tier {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 14px; margin: 16px 0;
+  }
+  .tier-card {
+    padding: 18px; border-radius: 8px; border: 1.5px solid var(--border);
+  }
+  .tier-0 { background: #fdecea; border-color: #c0392b; }
+  .tier-1 { background: #fff3e0; border-color: #e67e22; }
+  .tier-2 { background: #e8f4fc; border-color: #43AAE8; }
+  .tier-3 { background: #f0f2f4; border-color: #8A9EAB; }
+  .tier-4 { background: var(--blue-bg); border-color: var(--blue); }
+  .tier-card h4 { font-size: 14px; margin-bottom: 8px; font-weight: 700; }
+  .tier-card p { font-size: 12px; color: var(--muted); line-height: 1.6; }
+
+  /* ========== Score Box ========== */
+  .score-box {
+    display: inline-flex; align-items: center; justify-content: center;
+    min-width: 48px; height: 24px; border-radius: 4px; font-size: 11px; font-weight: 700;
+    padding: 0 8px;
+  }
+  .score-s { background: #c0392b; color: #fff; }
+  .score-a { background: #e67e22; color: #fff; }
+  .score-b { background: #43AAE8; color: #fff; }
+  .score-c { background: var(--gray-bg); color: #999; }
+
+  /* ========== Revision Block ========== */
+  .revision-block {
+    background: #fffde7; border: 1px solid #f9a825; border-radius: 8px;
+    padding: 20px 24px; margin-bottom: 24px; font-size: 14px; line-height: 2;
+  }
+  .revision-block strong { color: #f57f17; }
+
+  /* ========== Tables ========== */
+  .table-wrap { overflow-x: auto; margin: 16px 0; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; min-width: 800px; }
+  thead th {
+    background: #1a1a2e; color: #fff; padding: 10px 12px;
+    text-align: left; font-weight: 600; font-size: 12px; white-space: nowrap;
+  }
+  tbody td { padding: 10px 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  tbody tr:hover td { background: #f8f9ff; }
+  tbody tr.row-scarce td { background: var(--red-bg) !important; }
+  tbody tr.row-updated td { background: #fffde7 !important; }
+  tbody tr.row-fake td { background: var(--gray-bg) !important; color: #999 !important; }
+  tbody tr.row-highlight td { background: var(--gold-bg) !important; }
+  /* 风险表格行背景 */
+  tbody tr.risk-fatal td { background: var(--red-bg) !important; }
+  tbody tr.risk-severe td { background: var(--orange-bg) !important; }
+  tbody tr.risk-watch td { background: var(--gold-bg) !important; }
+
+  /* ========== Tags & Badges ========== */
+  /*
+    Unified color system — same meaning = same color everywhere:
+    Red (#c0392b)   = Top tier    (S级, 高, 一致, 极度稀缺, 10-100, 致命, P1)
+    Orange (#e67e22)= Second tier  (A级, 中高, 轻微差异, 高度稀缺, 1-10, 严重, P2)
+    Blue (#43AAE8)  = Third tier   (B级, 中, 口径差异, 中度稀缺, 注意, P3)
+    Gray (#8A9EAB)  = Bottom tier  (C级, 低, 冲突, 一般, 0-1, 无)
+  */
+  .tag { display: inline-block; padding: 2px 10px; border-radius: 12px; font-size: 11px; font-weight: 700; white-space: nowrap; }
+  .tag-s { background: #fdecea; color: #c0392b; }
+  .tag-a { background: #fff3e0; color: #e67e22; }
+  .tag-b { background: #e8f4fc; color: #2a7fb8; }
+  .tag-c { background: #f0f2f4; color: #8A9EAB; }
+  .tag-p1 { background: #fdecea; color: #c0392b; }
+  .tag-p2 { background: #fff3e0; color: #e67e22; }
+  .tag-p3 { background: #e8f4fc; color: #2a7fb8; }
+  /* Legacy classes kept for backward compat — do not use in new reports */
+  .tag-a1 { background: #fdecea; color: #c0392b; }
+  .tag-a2 { background: #fff3e0; color: #e67e22; }
+  .tag-a3 { background: #e8f4fc; color: #2a7fb8; }
+  .tag-b1 { background: #e8f4fc; color: #2a7fb8; }
+  .tag-b2 { background: #e8f4fc; color: #2a7fb8; }
+  .tag-b3 { background: #f0f2f4; color: #8A9EAB; }
+  .tag-scarce { background: #fdecea; color: #c0392b; border: 1px solid #c0392b; }
+  .tag-good { background: #fdecea; color: #c0392b; }
+  .tag-info { background: #fff3e0; color: #e67e22; }
+  .tag-risk { background: #f0f2f4; color: #8A9EAB; }
+  .tag-fake { background: #f0f2f4; color: #8A9EAB; border: 1px solid #d9d9d9; text-decoration: line-through; }
+  .tag-upgrade { background: #f3e5f5; color: #7b1fa2; }
+  .tag-downgrade { background: #f0f2f4; color: #8A9EAB; }
+
+  .badge { display: inline-block; padding: 1px 8px; border-radius: 3px; font-size: 10px; font-weight: 700; margin: 1px; }
+  .badge-good { background: #fdecea; color: #c0392b; }
+  .badge-warn { background: #e8f4fc; color: #2a7fb8; }
+  .badge-info { background: #fff3e0; color: #e67e22; }
+  .badge-risk { background: #f0f2f4; color: #8A9EAB; }
+  .badge-upgrade { background: #f3e5f5; color: #7b1fa2; }
+  .badge-downgrade { background: #f0f2f4; color: #8A9EAB; }
+  .badge-scarce { background: #fdecea; color: #c0392b; border: 1px solid #c0392b; font-size: 10px; }
+  .badge-fake { background: #f0f2f4; color: #8A9EAB; border: 1px solid #d9d9d9; font-size: 10px; }
+  .badge-consistent { background: #fdecea; color: #c0392b; }
+  .badge-minor { background: #fff3e0; color: #e67e22; }
+  .badge-conflict { background: #f0f2f4; color: #8A9EAB; }
+
+  /* ========== Rank Numbers ========== */
+  .rank-num {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 28px; height: 28px; border-radius: 50%; color: #fff; font-weight: 800; font-size: 13px;
+  }
+  .rk1 { background: #c0392b; } .rk2 { background: #e67e22; } .rk3 { background: #f39c12; color: #1a1a2e; }
+  .rk4 { background: #2980b9; } .rk5 { background: #27ae60; }
+  .rk-other { background: #95a5a6; }
+
+  /* ========== Risk Table ========== */
+  .risk-table td:first-child { text-align: center; }
+  .risk-table tbody td { vertical-align: middle; }
+
+  /* ========== Legend ========== */
+  .legend { display: flex; flex-wrap: wrap; gap: 14px; margin: 16px 0; font-size: 13px; }
+  .legend-item { display: flex; align-items: center; gap: 6px; }
+  .legend-dot { width: 12px; height: 12px; border-radius: 3px; display: inline-block; }
+
+  /* ========== SVG Chain Map ========== */
+  .svg-container { margin: 20px 0; text-align: center; overflow-x: auto; }
+  .svg-container svg { max-width: 100%; }
+
+  /* ========== Next Steps List ========== */
+  .next-steps { padding-left: 24px; line-height: 2.2; }
+  .next-steps li { margin: 6px 0; }
+
+  /* ========== Disclaimer ========== */
+  .disclaimer {
+    background: #fff3cd; border: 1px solid #ffc107; border-radius: 8px;
+    padding: 16px 20px; margin-top: 32px; font-size: 13px; color: #856404;
+  }
+
+  /* ========== Footer ========== */
+  .footer {
+    background: var(--hero-bg); color: rgba(255,255,255,.5);
+    text-align: center; padding: 32px; font-size: 13px; margin-top: 40px;
+  }
+
+  /* ========== Helpers ========== */
+  .text-muted { color: var(--muted); font-size: 13px; }
+  .text-sm { font-size: 13px; }
+  .mt-16 { margin-top: 16px; }
+  .mb-16 { margin-bottom: 16px; }
+
+  @media (max-width: 768px) {
+    .hero { padding: 36px 16px; }
+    .hero h1 { font-size: 24px; }
+    .metric-row { grid-template-columns: 1fr 1fr; }
+    .priority-grid { grid-template-columns: 1fr; }
+    .scarce-tier { grid-template-columns: 1fr; }
+    .toc ol { columns: 1; }
+    table { font-size: 12px; }
+    thead th, tbody td { padding: 6px 8px; }
+  }
+  @media print {
+    .hero { background: #1a1a2e !important; -webkit-print-color-adjust: exact; }
+    .toc { display: none; }
+    table { page-break-inside: auto; }
+    tr { page-break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ================================================================ -->
+<!--  HERO -->
+<!-- ================================================================ -->
+<div class="hero">
+  <h1>{{产业链名称}}产业链深度研究</h1>
+  <p class="sub">基于 Serenity 供应链瓶颈方法论 — 从系统变化到稀缺层级，再到公司排序</p>
+  <!-- 修订版时启用：<span class="revision">修订版 v{{N}}</span> -->
+  <p class="meta">
+    {{research_meta}} | {{market}} | {{methodology}}
+  </p>
+</div>
+
+<div class="container">
+
+<!-- ================================================================ -->
+<!--  TOC — AI fills in user's language -->
+<!-- ================================================================ -->
+<div class="toc" id="toc">
+  <h3>{{toc_title}}</h3>
+  <ol>
+    <li><a href="#s0">{{toc_s0}}</a></li>
+    <li><a href="#s1">{{toc_s1}}</a></li>
+    <li><a href="#s2">{{toc_s2}}</a></li>
+    <li><a href="#s3">{{toc_s3}}</a></li>
+    <li><a href="#s4">{{toc_s4}}</a></li>
+    <li><a href="#s5">{{toc_s5}}</a></li>
+    <li><a href="#s6">{{toc_s6}}</a></li>
+    <li><a href="#s7">{{toc_s7}}</a></li>
+    <li><a href="#s8">{{toc_s8}}</a></li>
+    <li><a href="#s9">{{toc_s9}}</a></li>
+  </ol>
+</div>
+
+<!--
+  Revision block (enable for revised versions):
+  <div class="revision-block">
+    <strong>{{revision_title}}</strong><br>
+    {{revision_items}}
+  </div>
+-->
+
+<!-- ================================================================ -->
+<!--  S0: Cross-verification & data credibility -->
+<!-- ================================================================ -->
+<div class="section" id="s0">
+  <h2 class="section-title">{{s0_title}}</h2>
+
+  <div class="card">
+    <div class="section-subtitle">{{s0_subtitle_1}}</div>
+    <div class="table-wrap">
+    <table>
+      <thead><tr>
+        <th>数据层级</th><th>来源</th><th>条数</th><th>可信度</th>
+      </tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>一级：官方财报/公告</strong></td>
+          <td>{{来源说明，如公司年报/季报/临时公告}}</td>
+          <td>{{数据点数量}}</td>
+          <td><span class="badge badge-good">高</span></td>
+        </tr>
+        <tr>
+          <td><strong>二级：交易所/监管文件</strong></td>
+          <td>{{来源说明，如互动易/上证e互动/问询函}}</td>
+          <td>{{数量}}</td>
+          <td><span class="badge badge-good">高</span></td>
+        </tr>
+        <tr>
+          <td><strong>三级：权威行业数据</strong></td>
+          <td>{{来源说明，如Prismark/LightCounting/协会}}</td>
+          <td>{{数量}}</td>
+          <td><span class="badge badge-good">高</span></td>
+        </tr>
+        <tr>
+          <td><strong>四级：券商研报</strong></td>
+          <td>{{来源说明}}</td>
+          <td>{{数量}}</td>
+          <td><span class="badge badge-info">中高</span></td>
+        </tr>
+        <tr>
+          <td><strong>五级：财经媒体</strong></td>
+          <td>{{来源说明}}</td>
+          <td>{{数量}}</td>
+          <td><span class="badge badge-warn">中</span></td>
+        </tr>
+        <tr>
+          <td><strong>六级：投资社区</strong></td>
+          <td>{{来源说明}}（作为线索，不作为直接证据）</td>
+          <td>{{数量}}</td>
+          <td><span class="badge badge-risk">低（仅参考）</span></td>
+        </tr>
+        <tr>
+          <td><strong>七级：量价关系</strong></td>
+          <td>{{价格/成交量异动说明，如涨停/放量/换手率异常}}（无基本面支撑的纯价格行为）</td>
+          <td>{{数量}}</td>
+          <td><span class="badge badge-risk">低（仅线索）</span></td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="section-subtitle">{{s0_subtitle_2}}</div>
+    <div class="table-wrap">
+    <table>
+      <thead><tr>
+        <th>数据点</th><th>来源A</th><th>来源B</th><th>来源C</th><th>一致性</th>
+      </tr></thead>
+      <tbody>
+        <tr>
+          <td>{{数据点描述}}</td>
+          <td>{{来源A及数值}}</td>
+          <td>{{来源B及数值}}</td>
+          <td>{{来源C及数值}}</td>
+          <td><span class="badge badge-consistent">一致</span></td>
+        </tr>
+        <!-- 逐条列出关键数据点 -->
+      </tbody>
+    </table>
+    </div>
+    <div class="insight insight-green">
+      <strong>交叉验证结论：</strong>{{总体可信度判断}}
+    </div>
+  </div>
+</div>
+
+<!-- ================================================================ -->
+<!--  {{s1_comment}} -->
+<!-- ================================================================ -->
+<div class="section" id="s1">
+  <h2 class="section-title">{{s1_title}}</h2>
+
+  <!-- (a) 一句话判断 -->
+  <div class="insight insight-red">
+    <strong>Serenity研判：</strong>{{用一句话概括产业链核心矛盾和最大机会}}
+  </div>
+
+  <!-- (b) 层级排序摘要 -->
+  <div class="insight insight-blue">
+    <strong>产业链层级排序（从最稀缺到最不稀缺）：</strong><br>
+    🥇 <strong>{{层级1}}</strong> — {{一句话稀缺原因}}<br>
+    🥈 <strong>{{层级2}}</strong> — {{一句话稀缺原因}}<br>
+    🥉 <strong>{{层级3}}</strong> — {{一句话稀缺原因}}<br>
+    <!-- 更多层级... -->
+  </div>
+
+  <!-- (c) 层级统一评分表 -->
+  <div class="card">
+    <div class="section-subtitle">{{N}}大层级统一评分</div>
+    <div class="table-wrap">
+    <table>
+      <thead><tr>
+        <th style="width:50px">排名</th>
+        <th>层级</th>
+        <th>稀缺性</th>
+        <th style="width:80px">扩产周期</th>
+        <th>涨价/供需证据</th>
+        <th style="width:70px">供应商数</th>
+        <th style="width:150px">综合判断</th>
+      </tr></thead>
+      <tbody>
+        <tr class="row-scarce">
+          <td><span class="rank-num rk1">1</span></td>
+          <td><strong>{{层级名称}}</strong></td>
+          <td>⭐⭐⭐⭐⭐</td>
+          <td>{{N-N月}}</td>
+          <td>{{具体涨价/缺口证据}}</td>
+          <td>全球{{N}}家</td>
+          <td><strong>{{结论}}</strong></td>
+        </tr>
+        <tr class="row-scarce">
+          <td><span class="rank-num rk2">2</span></td>
+          <td><strong>{{层级名称}}</strong></td>
+          <td>⭐⭐⭐⭐</td>
+          <td>{{N-N月}}</td>
+          <td>{{证据}}</td>
+          <td>{{数量}}</td>
+          <td><strong>{{结论}}</strong></td>
+        </tr>
+        <!-- 更多层级... -->
+      </tbody>
+    </table>
+    </div>
+  </div>
+
+  <!-- (d) 数据速览 -->
+  <div class="metric-row">
+    <div class="metric-card scarce">
+      <div class="num">{{数字}}</div>
+      <div class="label">{{指标1}}<br>{{同比变化}}</div>
+    </div>
+    <div class="metric-card">
+      <div class="num blue">{{数字}}</div>
+      <div class="label">{{指标2}}<br>{{同比变化}}</div>
+    </div>
+    <div class="metric-card">
+      <div class="num green">{{数字}}</div>
+      <div class="label">{{指标3}}<br>{{同比变化}}</div>
+    </div>
+    <div class="metric-card scarce">
+      <div class="num">{{数字}}</div>
+      <div class="label">{{指标4}}<br>{{同比变化}}</div>
+    </div>
+  </div>
+
+  <!-- (e) 重要发现 -->
+  <div class="insight insight-green">
+    <strong>v{{N}}重要发现：</strong>{{新增的关键认知或修正}}
+  </div>
+
+  <!-- (f) 投资优先级卡片 -->
+  <h3 class="section-subtitle">{{s1_subtitle}}</h3>
+  <div class="priority-grid">
+    <div class="priority-card c1">
+      <span class="rank">S级 — Top research priority</span>
+      <h4>{{公司组合}}</h4>
+      <p>{{一句话说明卡住的核心环节}}</p>
+    </div>
+    <div class="priority-card c2">
+      <span class="rank">A级 — High research priority</span>
+      <h4>{{公司组合}}</h4>
+      <p>{{一句话说明核心逻辑}}</p>
+    </div>
+    <div class="priority-card c3">
+      <span class="rank">B级 — Worth tracking</span>
+      <h4>{{公司组合}}</h4>
+      <p>{{一句话说明确定性来源}}</p>
+    </div>
+  </div>
+</div>
+
+<!-- ================================================================ -->
+<!--  {{s2_title}} -->
+<!-- ================================================================ -->
+<div class="section" id="s2">
+  <h2 class="section-title">{{s2_title}}</h2>
+
+  <div class="card">
+    <div class="section-subtitle">系统变化对比</div>
+    <div class="table-wrap">
+    <table>
+      <thead><tr>
+        <th>维度</th><th>旧系统</th><th>新系统</th><th>物理约束</th>
+      </tr></thead>
+      <tbody>
+        <tr>
+          <td>{{维度}}</td><td>{{之前状态}}</td><td>{{变化/升级}}</td><td>{{具体物理瓶颈}}</td>
+        </tr>
+        <!-- 逐维度展开 -->
+      </tbody>
+    </table>
+    </div>
+    <div class="insight insight-gold">
+      <strong>{{s2_subtitle}}：</strong>{{一句话总结最核心的硬瓶颈——为什么供给无法快速跟上}}
+    </div>
+  </div>
+</div>
+
+<!-- ================================================================ -->
+<!--  {{s3_title}} -->
+<!-- ================================================================ -->
+<div class="section" id="s3">
+  <h2 class="section-title">{{s3_title}}</h2>
+  <p class="text-muted mb-16">{{产业链描述：从下游需求到上游材料，N大层级。红色=最稀缺/卡脖子层级}}</p>
+
+  <!--
+    通用产业链图谱（方案 C：8 层骨架 + 自由 SVG 区）
+
+    使用方式：
+    1. chainData：8 层价值链骨架。层数可删减（不是所有产业链都有 8 层）。
+       只需保留实际存在的层，删除不存在的层即可。scarcity 0-5 控制颜色。
+    2. customDiagramSvg：自由 SVG 区（可选）。用于画"需求波→系统变化→稀缺层"
+       的逻辑流程图、树状图、或任何 chainData 表达不了的补充图。
+       AI 直接填 SVG 字符串，留空则不显示。
+  -->
+  <div class="svg-container">
+    <div id="chainMap"></div>
+  </div>
+
+  <!-- 自由 SVG 区：AI 可在此插入自定义流程图/树状图/逻辑链，留空不显示 -->
+  <div class="svg-container" id="customDiagramWrap" style="margin-top: 24px;">
+    <div id="customDiagram"></div>
+  </div>
+  <script>
+  (function () {
+    // ===== AI 填充区：把下面的示例数据替换成实际产业链数据 =====
+    var chainData = {
+      title: "{{产业链名称}}产业链价值图谱",
+      layers: [
+        { name: "L1 下游需求", scarcity: 0, desc: "{{需求端描述}}", items: [
+          { name: "{{子方向1}}", companies: "{{代表客户/场景}}" },
+          { name: "{{子方向2}}", companies: "{{代表客户/场景}}" },
+          { name: "{{子方向3}}", companies: "{{代表客户/场景}}" }
+        ]},
+        { name: "L2 系统集成", scarcity: 2, desc: "{{集成环节描述}}", items: [
+          { name: "{{子环节1}}", companies: "{{公司1·公司2}}" },
+          { name: "{{子环节2}}", companies: "{{公司1·公司2}}" },
+          { name: "{{子环节3}}", companies: "{{公司1·公司2}}" }
+        ]},
+        { name: "L3 模块/子系统", scarcity: 3, desc: "{{模块环节描述}}", items: [
+          { name: "{{子模块1}}", companies: "{{公司1·公司2}}" },
+          { name: "{{子模块2}}", companies: "{{公司1·公司2}}" },
+          { name: "{{子模块3}}", companies: "{{公司1·公司2}}" }
+        ]},
+        { name: "L4 芯片/器件", scarcity: 5, desc: "{{器件环节描述}}", items: [
+          { name: "{{器件子类1}}", companies: "{{公司1·公司2}}" },
+          { name: "{{器件子类2}}", companies: "{{公司1·公司2}}" },
+          { name: "{{器件子类3}}", companies: "{{公司1·公司2}}" }
+        ]},
+        { name: "L5 工艺/封装", scarcity: 4, desc: "{{工艺环节描述}}", items: [
+          { name: "{{工艺环节1}}", companies: "{{公司1·公司2}}" },
+          { name: "{{工艺环节2}}", companies: "{{公司1·公司2}}" },
+          { name: "{{工艺环节3}}", companies: "{{公司1·公司2}}" }
+        ]},
+        { name: "L6 设备/测试", scarcity: 3, desc: "{{设备环节描述}}", items: [
+          { name: "{{设备类型1}}", companies: "{{公司1·公司2}}" },
+          { name: "{{设备类型2}}", companies: "{{公司1·公司2}}" },
+          { name: "{{测试设备}}", companies: "{{公司1·公司2}}" }
+        ]},
+        { name: "L7 材料/耗材", scarcity: 5, desc: "{{材料环节描述}}", items: [
+          { name: "{{材料1}}", companies: "{{公司1·公司2}}" },
+          { name: "{{材料2}}", companies: "{{公司1·公司2}}" },
+          { name: "{{材料3}}", companies: "{{公司1·公司2}}" }
+        ]},
+        { name: "L8 物理基础设施", scarcity: 0, desc: "{{基础设施描述}}", items: [
+          { name: "{{类别1}}", companies: "{{公司1·公司2}}" },
+          { name: "{{类别2}}", companies: "{{公司1·公司2}}" }
+        ]}
+      ],
+      summary: "稀缺性排序: {{L4/L7(卡脖子)}} > {{L5/L3}} > {{L6}} > {{L2}} > {{L1/L8}}"
+    };
+    // ===== 填充区结束 =====
+
+    var scarcityMeta = {
+      5: { label: "★★★★★ 极度稀缺", color: "#c0392b", bg: "#fff2f0", grad: "gRed" },
+      4: { label: "★★★★ 高度稀缺", color: "#e67e22", bg: "#fffaf0", grad: "gOrange" },
+      3: { label: "★★★ 中度稀缺", color: "#d4a017", bg: "#fffbeb", grad: "gGold" },
+      2: { label: "★★ 有壁垒", color: "#8e44ad", bg: "#f9f0ff", grad: "gPurple" },
+      1: { label: "★ 一般", color: "#27ae60", bg: "#f0fff4", grad: "gGreen" },
+      0: { label: "", color: "#7f8c8d", bg: "#f5f5f5", grad: "gGray" }
+    };
+
+    var W = 1200, padX = 20, layerH = 115, headerH = 30, itemH = 55, gap = 10, topPad = 55, bottomPad = 90;
+    var layers = chainData.layers;
+    var totalH = topPad + layers.length * (layerH + gap) + bottomPad;
+
+    var defs = '';
+    var colorIds = ["gRed","gOrange","gGold","gPurple","gGreen","gGray"];
+    var colorVals = [["#c0392b","#e74c3c"],["#e67e22","#f39c12"],["#d4a017","#f1c40f"],["#8e44ad","#af7ac5"],["#27ae60","#58d68d"],["#7f8c8d","#bdc3c7"]];
+    for (var i = 0; i < colorIds.length; i++) {
+      defs += '<linearGradient id="' + colorIds[i] + '" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="' + colorVals[i][0] + '"/><stop offset="100%" stop-color="' + colorVals[i][1] + '"/></linearGradient>';
+    }
+    defs += '<filter id="sh"><feDropShadow dx="1" dy="2" stdDeviation="3" flood-opacity="0.12"/></filter>';
+
+    var body = '';
+    // Title
+    body += '<text x="' + (W/2) + '" y="28" text-anchor="middle" font-size="19" font-weight="800" fill="#1a1a2e">' + chainData.title + '</text>';
+
+    var y = 45;
+    for (var li = 0; li < layers.length; li++) {
+      var layer = layers[li];
+      var meta = scarcityMeta[layer.scarcity] || scarcityMeta[0];
+      var layerTop = y;
+      var layerW = W - padX * 2;
+      var layerX = padX;
+      var itemsLen = layer.items.length;
+      var itemW = Math.floor((layerW - (itemsLen + 1) * 10) / itemsLen);
+
+      // Layer background
+      body += '<rect x="' + layerX + '" y="' + layerTop + '" width="' + layerW + '" height="' + layerH + '" rx="8" fill="' + meta.bg + '" stroke="' + meta.color + '" stroke-width="2" filter="url(#sh)"/>';
+
+      // Header bar
+      body += '<rect x="' + layerX + '" y="' + layerTop + '" width="' + layerW + '" height="' + headerH + '" rx="8" fill="url(#' + meta.grad + ')"/>';
+      body += '<rect x="' + layerX + '" y="' + (layerTop + headerH - 14) + '" width="' + layerW + '" height="14" fill="url(#' + meta.grad + ')"/>';
+
+      // Header text
+      var headerText = layer.name + (layer.desc ? ' | ' + layer.desc : '') + (meta.label ? '    ' + meta.label : '');
+      body += '<text x="' + (layerX + 30) + '" y="' + (layerTop + 21) + '" font-size="13" font-weight="800" fill="#fff">' + headerText + '</text>';
+
+      // Sub-items
+      var itemY = layerTop + headerH + 10;
+      var itemX = layerX + 10;
+      for (var ii = 0; ii < itemsLen; ii++) {
+        var item = layer.items[ii];
+        body += '<rect x="' + itemX + '" y="' + itemY + '" width="' + itemW + '" height="' + itemH + '" rx="6" fill="#fff" stroke="' + meta.color + '" stroke-width="1"/>';
+        body += '<text x="' + (itemX + itemW/2) + '" y="' + (itemY + 22) + '" text-anchor="middle" font-size="13" font-weight="700" fill="' + meta.color + '">' + item.name + '</text>';
+        body += '<text x="' + (itemX + itemW/2) + '" y="' + (itemY + 42) + '" text-anchor="middle" font-size="11" fill="#555">' + (item.companies || '') + '</text>';
+        itemX += itemW + 10;
+      }
+
+      y += layerH + gap;
+    }
+
+    // Summary line
+    body += '<text x="' + (W/2) + '" y="' + (y + 15) + '" text-anchor="middle" font-size="13" font-weight="700" fill="#1a1a2e">' + chainData.summary + '</text>';
+    y += 35;
+
+    // Legend
+    var legendY = y;
+    body += '<rect x="' + padX + '" y="' + legendY + '" width="' + layerW + '" height="40" rx="6" fill="#fafafa" stroke="#e0e0e0" stroke-width="1"/>';
+    var legendItems = [
+      { color: "#fff2f0", stroke: "#c0392b", label: "极度稀缺" },
+      { color: "#fffaf0", stroke: "#e67e22", label: "高度稀缺" },
+      { color: "#fffbeb", stroke: "#d4a017", label: "中度稀缺" },
+      { color: "#f9f0ff", stroke: "#8e44ad", label: "有壁垒" },
+      { color: "#f0fff4", stroke: "#27ae60", label: "一般" },
+      { color: "#f5f5f5", stroke: "#7f8c8d", label: "基础设施" }
+    ];
+    var lx = padX + 20;
+    for (var li2 = 0; li2 < legendItems.length; li2++) {
+      body += '<rect x="' + lx + '" y="' + (legendY + 13) + '" width="14" height="14" fill="' + legendItems[li2].color + '" stroke="' + legendItems[li2].stroke + '" stroke-width="1"/>';
+      body += '<text x="' + (lx + 20) + '" y="' + (legendY + 25) + '" font-size="11" fill="#555">' + legendItems[li2].label + '</text>';
+      lx += 110;
+    }
+
+    var svg = '<svg viewBox="0 0 ' + W + ' ' + (legendY + 50) + '" xmlns="http://www.w3.org/2000/svg"><defs>' + defs + '</defs>' + body + '</svg>';
+    document.getElementById('chainMap').innerHTML = svg;
+  })();
+
+  // ===== 自由 SVG 区（可选）=====
+  // AI 在这里填自定义 SVG 字符串（流程图/树状图/逻辑链等）
+  // 留空 "" 则不显示。建议 viewBox 宽度 1200，高度自定。
+  var customDiagramSvg = ""; // ← AI 替换为实际 SVG，或保持空字符串
+  if (customDiagramSvg.trim()) {
+    document.getElementById('customDiagram').innerHTML = customDiagramSvg;
+  } else {
+    document.getElementById('customDiagramWrap').style.display = 'none';
+  }
+  </script>
+
+  <div class="legend">
+    <div class="legend-item"><span class="legend-dot" style="background:#c0392b;"></span>极度稀缺/卡脖子</div>
+    <div class="legend-item"><span class="legend-dot" style="background:#e67e22;"></span>高度稀缺</div>
+    <div class="legend-item"><span class="legend-dot" style="background:#43AAE8;"></span>中度稀缺</div>
+    <div class="legend-item"><span class="legend-dot" style="background:#8A9EAB;"></span>一般/供给充足</div>
+  </div>
+
+  <!-- 稀缺层级卡片 -->
+  <h3 class="section-subtitle">稀缺层级排序</h3>
+  <div class="scarce-tier">
+    <div class="tier-card tier-0">
+      <h4>Tier 0 — 极度稀缺</h4>
+      <p>{{层级名称}}：{{稀缺原因，供应商数量，缺口比例}}</p>
+    </div>
+    <div class="tier-card tier-1">
+      <h4>Tier 1 — 高度稀缺</h4>
+      <p>{{层级名称}}：{{稀缺原因}}</p>
+    </div>
+    <div class="tier-card tier-2">
+      <h4>Tier 2 — 中度稀缺</h4>
+      <p>{{层级名称}}：{{稀缺原因}}</p>
+    </div>
+    <div class="tier-card tier-3">
+      <h4>Tier 3 — 一般稀缺</h4>
+      <p>{{层级名称}}：{{说明}}</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="section-subtitle">{{s3_subtitle}}</div>
+    <div class="table-wrap">
+    <table>
+      <thead><tr>
+        <th>层级</th><th>细分方向</th><th>稀缺度</th><th>核心逻辑</th><th>代表公司</th>
+      </tr></thead>
+      <tbody>
+        <tr class="row-scarce">
+          <td><strong>L{{N}}</strong></td>
+          <td>{{细分}}</td>
+          <td><span class="tag tag-s">S级·极度稀缺</span></td>
+          <td>{{逻辑说明}}</td>
+          <td>{{公司列表}}</td>
+        </tr>
+        <!-- 逐层展开。稀缺度用 tag-s/tag-a/tag-b/tag-c，与全文评级颜色一致 -->
+      </tbody>
+    </table>
+    </div>
+  </div>
+</div>
+
+<!-- ================================================================ -->
+<!--  {{s4_title}} -->
+<!-- ================================================================ -->
+<div class="section" id="s4">
+  <h2 class="section-title">{{s4_title}}</h2>
+  <p class="section-desc">
+    {{s4_desc}}
+  </p>
+  <div class="legend">
+    <div class="legend-item"><span class="legend-dot" style="background:#c0392b;"></span>10-100 已验证龙头（S/A级）</div>
+    <div class="legend-item"><span class="legend-dot" style="background:#e67e22;"></span>1-10 正在突破（A级/B级）</div>
+    <div class="legend-item"><span class="legend-dot" style="background:#43AAE8;"></span>B级 值得跟踪</div>
+    <div class="legend-item"><span class="legend-dot" style="background:#8A9EAB;"></span>0-1 早期线索/弹性（C级）</div>
+  </div>
+
+  <!-- ===== 领域 1 ===== -->
+  <div class="section-subtitle">细分领域1：{{名称}}（{{核心材料/技术}}）</div>
+  <p class="section-desc">{{该细分领域的技术壁垒、市场格局、关键变化}}</p>
+  <div class="table-wrap">
+  <table>
+    <thead><tr>
+      <th>公司</th>
+      <th>代码</th>
+      <th>阶段</th>
+      <th>核心定位</th>
+      <th>关键证据</th>
+      <th>优先级</th>
+      <th>备注</th>
+    </tr></thead>
+    <tbody>
+      <tr class="row-scarce">
+        <td><strong>{{公司名}}</strong></td>
+        <td>{{代码}}</td>
+        <td><span class="badge badge-scarce">10-100</span></td>
+        <td>{{一句话定位}}</td>
+        <td>{{①证据1；②证据2；③证据3}}</td>
+        <td><span class="tag tag-s">S级·优先研究</span></td>
+        <td>
+          <span class="badge badge-scarce">稀缺：{{原因}}</span>
+          <span class="badge badge-good">份额上升</span>
+        </td>
+      </tr>
+      <tr class="row-updated">
+        <td><strong>{{公司名}}</strong></td>
+        <td>{{代码}}</td>
+        <td><span class="badge badge-scarce">10-100</span></td>
+        <td>{{一句话定位}}</td>
+        <td>{{①证据1；②<strong>证据2（{{日期}}确认）</strong>；③证据3}}</td>
+        <td><span class="tag tag-a">A级·高优先</span></td>
+        <td>
+          <span class="badge badge-good">份额上升</span>
+          <span class="badge badge-upgrade">v{{N}}升级：{{旧评级}}→{{新评级}}</span>
+        </td>
+      </tr>
+      <tr>
+        <td><strong>{{公司名}}</strong></td>
+        <td>{{代码}}</td>
+        <td><span class="badge badge-warn">1-10</span></td>
+        <td>{{一句话定位}}</td>
+        <td>{{①证据1；②证据2}}</td>
+        <td><span class="tag tag-b">B级·值得跟踪</span></td>
+        <td><span class="badge badge-warn">弹性大</span></td>
+      </tr>
+      <tr>
+        <td><strong>{{公司名}}</strong></td>
+        <td>{{代码}}</td>
+        <td><span class="badge badge-info">0-1</span></td>
+        <td>{{一句话定位}}</td>
+        <td>{{①证据1；②待验证}}</td>
+        <td><span class="tag tag-c">C级·早期线索</span></td>
+        <td><span class="badge badge-info">高弹性·待验证</span></td>
+      </tr>
+      <!-- 更多公司... 每个细分领域 4-6 个标的 -->
+    </tbody>
+  </table>
+  </div>
+  <p class="text-muted mt-16">覆盖{{N}}家。{{总结该细分领域的关键判断}}</p>
+
+  <!-- ===== 领域 2..N ===== -->
+  <!-- 按上述格式逐领域展开 -->
+
+</div>
+
+<!-- ================================================================ -->
+<!--  {{s5_title}} -->
+<!-- ================================================================ -->
+<div class="section" id="s5">
+  <h2 class="section-title">{{s5_title}}</h2>
+  <p class="section-desc">以下公司近期被"{{产业链}}"概念炒作推高股价，但它们实际上并非{{产业链}}核心标的。请注意区分。</p>
+
+  <div class="card card-warn">
+    <div class="table-wrap">
+    <table>
+      <thead><tr>
+        <th>公司</th>
+        <th>代码</th>
+        <th>主营业务</th>
+        <th>与{{产业链}}的实际关系</th>
+        <th>公司澄清/核实来源</th>
+      </tr></thead>
+      <tbody>
+        <tr class="row-fake">
+          <td><strong>{{公司名}}</strong></td>
+          <td>{{代码}}</td>
+          <td>{{主营业务}}</td>
+          <td><span class="tag tag-fake">零关系</span> {{实际关联度说明}}</td>
+          <td><strong>公司公告（{{日期}}）：</strong>"{{澄清原文}}"</td>
+        </tr>
+        <!-- 更多伪标的... -->
+      </tbody>
+    </table>
+    </div>
+  </div>
+</div>
+
+<!-- ================================================================ -->
+<!--  {{s6_comment}} -->
+<!-- ================================================================ -->
+<div class="section" id="s6">
+  <h2 class="section-title">{{s6_title}}</h2>
+
+  <div class="insight insight-blue">
+    <strong>排序说明：</strong>排名综合考虑稀缺性/产业链卡位/证据质量/估值压力/风险五个维度。先排产业链层级，再排公司。评级来自 serenity_scorecard.py 的 verdict：S=Top research priority，A=High research priority，B=Worth tracking，C=Early lead or low priority。
+  </div>
+
+  <div class="table-wrap">
+  <table>
+    <thead><tr>
+      <th style="width:44px">排序</th>
+      <th>公司</th>
+      <th>代码</th>
+      <th>卡住环节</th>
+      <th>链位置</th>
+      <th>排序原因</th>
+      <th>评级</th>
+      <th>最大风险</th>
+    </tr></thead>
+    <tbody>
+      <tr class="row-scarce">
+        <td><span class="rank-num rk1">1</span></td>
+        <td><strong>{{公司名}}</strong></td>
+        <td>{{代码}}</td>
+        <td>{{具体卡点}}</td>
+        <td>{{产业链位置}}</td>
+        <td>{{为什么排这个位置}}</td>
+        <td><span class="tag tag-s">S</span></td>
+        <td>{{最大风险}}</td>
+      </tr>
+      <tr class="row-scarce">
+        <td><span class="rank-num rk2">2</span></td>
+        <td><strong>{{公司名}}</strong></td>
+        <td>{{代码}}</td>
+        <td>{{具体卡点}}</td>
+        <td>{{产业链位置}}</td>
+        <td>{{排序原因}}</td>
+        <td><span class="tag tag-a">A</span></td>
+        <td>{{最大风险}}</td>
+      </tr>
+      <!-- 更多排序... -->
+    </tbody>
+  </table>
+  </div>
+
+  <div class="card">
+    <div class="section-subtitle">交叉验证说明</div>
+    <ul class="next-steps">
+      <li><strong>季报/年报验证：</strong>{{已验证的财务数据汇总}}</li>
+      <li><strong>产品进展验证：</strong>{{已验证的产品/认证/订单进展}}</li>
+      <li><strong>供应链验证：</strong>{{已验证的供应链关系}}</li>
+      <li><strong>行业权威数据：</strong>{{行业数据来源及结论}}</li>
+      <li><strong>备注：</strong>{{需要存疑/后续跟踪的数据点}}</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ================================================================ -->
+<!--  {{s7_comment}} -->
+<!-- ================================================================ -->
+<div class="section" id="s7">
+  <h2 class="section-title">{{s7_title}}</h2>
+  <p class="section-desc">以下是对比市场主流观点与 Serenity 深度分析的认知差。这些差异是超额收益的潜在来源。</p>
+
+  <div class="card">
+    <div class="table-wrap">
+    <table>
+      <thead><tr>
+        <th style="width:4%">#</th>
+        <th style="width:25%">市场共识</th>
+        <th style="width:25%">可能没看清的地方</th>
+        <th>受益标的</th>
+      </tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>1</strong></td>
+          <td>{{市场普遍看法}}</td>
+          <td><strong>{{与市场共识不同的深度判断}}</strong></td>
+          <td>{{受益公司}}</td>
+        </tr>
+        <tr>
+          <td><strong>2</strong></td>
+          <td>{{市场普遍看法}}</td>
+          <td><strong>{{与市场共识不同的深度判断}}</strong></td>
+          <td>{{受益公司}}</td>
+        </tr>
+        <!-- 更多认知差... -->
+      </tbody>
+    </table>
+    </div>
+  </div>
+</div>
+
+<!-- ================================================================ -->
+<!--  {{s8_title}} -->
+<!-- ================================================================ -->
+<div class="section" id="s8">
+  <h2 class="section-title">{{s8_title}}</h2>
+  <p class="section-desc">每条风险包含四要素：风险等级、触发条件、跟踪指标、最大受伤标的。不给空泛警告。</p>
+
+  <div class="table-wrap">
+  <table class="risk-table">
+    <thead><tr>
+      <th style="width:80px">等级</th>
+      <th style="width:160px">风险</th>
+      <th>触发条件</th>
+      <th>跟踪指标</th>
+      <th style="width:120px">最大受伤标的</th>
+    </tr></thead>
+    <tbody>
+      <!-- 🔴 致命级 -->
+      <tr class="risk-fatal">
+        <td><span class="score-box score-s">致命</span></td>
+        <td><strong>{{风险1}}</strong></td>
+        <td>{{什么具体事件/指标变化说明风险正在兑现}}</td>
+        <td>{{盯什么数据来判断风险是否逼近}}</td>
+        <td>{{受冲击最大的公司}}</td>
+      </tr>
+      <tr class="risk-fatal">
+        <td><span class="score-box score-s">致命</span></td>
+        <td><strong>{{风险2}}</strong></td>
+        <td>{{触发条件}}</td>
+        <td>{{跟踪指标}}</td>
+        <td>{{受冲击最大的公司}}</td>
+      </tr>
+      <!-- 🟠 严重级 -->
+      <tr class="risk-severe">
+        <td><span class="score-box score-a">严重</span></td>
+        <td><strong>{{风险3}}</strong></td>
+        <td>{{触发条件}}</td>
+        <td>{{跟踪指标}}</td>
+        <td>{{受冲击最大的公司}}</td>
+      </tr>
+      <tr class="risk-severe">
+        <td><span class="score-box score-a">严重</span></td>
+        <td><strong>{{风险4}}</strong></td>
+        <td>{{触发条件}}</td>
+        <td>{{跟踪指标}}</td>
+        <td>{{受冲击最大的公司}}</td>
+      </tr>
+      <!-- 🟡 注意级 -->
+      <tr class="risk-watch">
+        <td><span class="score-box score-b">注意</span></td>
+        <td><strong>{{风险5}}</strong></td>
+        <td>{{触发条件}}</td>
+        <td>{{跟踪指标}}</td>
+        <td>{{受冲击最大的公司}}</td>
+      </tr>
+      <tr class="risk-watch">
+        <td><span class="score-box score-b">注意</span></td>
+        <td><strong>{{风险6}}</strong></td>
+        <td>{{触发条件}}</td>
+        <td>{{跟踪指标}}</td>
+        <td>{{受冲击最大的公司}}</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+</div>
+
+<!-- ================================================================ -->
+<!--  {{s9_title}} -->
+<!-- ================================================================ -->
+<div class="section" id="s9">
+  <h2 class="section-title">{{s9_title}}</h2>
+  <p class="section-desc">以下验证事项按优先级排列。P1=关键（直接影响投资判断），P2=重要（完善证据链），P3=补充（锦上添花）。</p>
+
+  <div class="card">
+    <div class="table-wrap">
+    <table>
+      <thead><tr>
+        <th style="width:40px">#</th>
+        <th>待验证事项</th>
+        <th>验证方法</th>
+        <th style="width:80px">重要性</th>
+      </tr></thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td><strong>{{验证事项}}</strong></td>
+          <td>{{查什么文件/数据/公告}}</td>
+          <td><span class="tag tag-p1">P1 关键</span></td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td><strong>{{验证事项}}</strong></td>
+          <td>{{验证方法}}</td>
+          <td><span class="tag tag-p2">P2 重要</span></td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td><strong>{{验证事项}}</strong></td>
+          <td>{{验证方法}}</td>
+          <td><span class="tag tag-p3">P3 补充</span></td>
+        </tr>
+        <!-- 更多验证项... -->
+      </tbody>
+    </table>
+    </div>
+  </div>
+</div>
+
+<!-- ================================================================ -->
+<!--  {{disclaimer_label}} -->
+<!-- ================================================================ -->
+<div class="disclaimer">
+  <strong>{{disclaimer_label}}：</strong>本报告仅供研究参考，不构成任何投资建议。报告中的分析和判断基于公开数据和信息，可能存在误差或遗漏。{{产业链}}行业技术迭代快、估值波动大，投资需谨慎。所有投资决策和交易责任由投资者自行承担。本报告遵循Serenity.skill方法论，强调研究优先级排序。
+</div>
+
+</div>
+
+<!-- ================================================================ -->
+<div class="footer">
+  <p>{{产业链名称}}产业链深度研究 &copy; {{日期}} | 方法论：Serenity.skill | 覆盖{{N}}大层级、{{N}}+家公司</p>
+  <p style="margin-top:6px;">信息源：{{来源列表}} | 交叉验证：多源比对确保一致性</p>
+</div>
+
+</body>
+</html>
