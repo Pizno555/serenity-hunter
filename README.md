@@ -39,7 +39,7 @@ Copy this folder to your skills directory:
 Or use the skill installer:
 
 ```
-安装 skill: github:Pizno/serenity-hunter
+安装 skill: github:Pizno555/serenity-hunter
 ```
 
 ### Other agent platforms
