@@ -28,7 +28,7 @@
       "references/company-universe-build.md (v2.0.0: new file, Step 5 extracted, added 6 methods + 4 hard gates)",
       "references/serenity-dialogue-protocol.md (v2.0.0: added Q12 valuation-gap question + partner-mode exit condition)",
       "assets/thesis-template.md (v2.0.0: added valuation snapshot field)",
-      "assets/thesis-template-a-share.md (v2.0.0: new file, A-share specific)"
+      "assets/thesis-template-a-share.md (v2.0.0: new file, A-share specific; v2.0.1: aligned to HTML 10-section structure, kept A-share-specific risk checks inside S4 company sections)"
     ],
     "guarded_additions": [
       "references/evidence-ladder.md (v2.0.0 guard + 7-Tier search priority appended)",

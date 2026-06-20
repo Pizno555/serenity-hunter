@@ -1,138 +1,212 @@
-# Serenity.skill Thesis Template — A-share
+# Serenity Thesis Template — A-share
 
 Use this template when the user asks for a structured memo on a China A-share
-company. For normal chat, answer in prose. For non-A-share markets, use the
-base `thesis-template.md`.
+industry or company. For normal chat, answer in prose. For non-A-share markets,
+use the base `thesis-template.md`.
 
-## Direct view
+Structure mirrors `assets/serenity-report-template.html` (产业链全景 → 公司排序 →
+风险 → 下一步). The two formats render the same research output — Markdown as
+skeleton, HTML as visual report. This template adds A-share-specific risk checks
+inside the company sections.
 
-Priority: Low / Medium / High / Top priority
+Timing: per `SKILL.md`, fill this template only AFTER completing the deep
+research workflow (Step 1-7). Templates present results; they do not drive
+research direction.
 
-Confidence: Low / Medium / High
+---
 
-Time horizon: 3 months / 12 months / multi-year
+## S1. 核心结论：先排层级，再排公司
 
-## Trend
+### Serenity 研判
 
-What demand wave is forcing the change?
+[一句话概括产业链核心矛盾和最大机会，指出最硬的物理约束链条]
 
-## System change
+### 稀缺度排序（从最稀缺到最不稀缺，#编号不同于供应链L编号）
 
-What technical or economic constraint is becoming harder to scale?
+- #1 — [层级] — [一句话稀缺原因]
+- #2 — [层级] — [一句话稀缺原因]
+- #3 — [层级] — [一句话稀缺原因]
+- #4 — [层级] — [一句话稀缺原因]
+- #5 — [层级] — [一句话稀缺原因]
+- #6 — [层级] — [一句话稀缺原因]
+- #7 — [层级] — [一句话稀缺原因]
+- #8 — [层级] — [一句话稀缺原因]
 
-## Value-chain map
+## S2. 市场叙事 → 系统变化 → 物理约束
 
-```text
-End demand -> system -> module -> component -> process -> equipment/material -> infrastructure
+### 需求传导链
+
+[需求源头 → 系统压力 → 技术升级 → 物理约束层，加粗显示完整传导链]
+
+支撑数据：
+- [指标1：如 2026 全球市场 N 亿]
+- [指标2：如 AI vs 传统价值量 N 倍]
+- [指标3：如 材料缺口 N 吨]
+
+### 关键物理约束识别
+
+| 系统变化 | 所需技术升级 | 物理约束层 | 约束性质 |
+|---|---|---|---|
+| [系统变化1] | [技术升级1] | [约束层1] | [约束性质1] |
+| [系统变化2] | [技术升级2] | [约束层2] | [约束性质2] |
+
+## S3. 产业链全景图
+
+### [N] 层产业链全景一览
+
+| 层级 | 英文 | 一句话解释 | 细分方向 | 稀缺度 | 代表公司 |
+|---|---|---|---|---|---|
+| L1 [中文名] | [English] | [一句话解释] | [细分方向] | [稀缺度] | [代表公司] |
+| L2 [中文名] | [English] | [一句话解释] | [细分方向] | [稀缺度] | [代表公司] |
+| ... | | | | | |
+
+### [N] 大层级稀缺性评分
+
+数据来自 `references/scarcity-assessment.md` Step 4.1 的 9-indicator fact extraction。
+
+| 层级 | 供应商数 | 认证期 | 扩张难度 | 物理壁垒 | 设备依赖 | 切换成本 | 交期 | 产能锁定 | 稀缺评级 |
+|---|---|---|---|---|---|---|---|---|---|
+| [层级1] | [全球寡头 N 家] | [>18月] | [>2年] | [近物理极限] | [仅1-2家] | [>12月] | [>6月] | [>80%] | S级 L1 Chokepoint |
+| [层级2] | [...] | [...] | [...] | [...] | [...] | [...] | [...] | [...] | S级 L1 Chokepoint |
+| [层级3] | [...] | [...] | [...] | [...] | [...] | [...] | [...] | [...] | A级 L2 Chokepoint |
+| [层级4] | [...] | [...] | [...] | [...] | [...] | [...] | [...] | [...] | C级 |
+
+### Value-Chain Completeness Declaration
+
+```
+[Value-Chain Completeness Declaration]
+Total layers covered: [N]
+layer-01: [name] — [one-sentence definition]
+layer-02: [name] — [one-sentence definition]
+...
+Layers not included:
+[layer name] — reason: [xxx]
+(write "none" if no gaps)
+Self-check items passed: 1-7 all passed
 ```
 
-## Candidate position
+注：[层级拆分/调整说明，如 CCL 层按 Granularity Rule 从 L3 拆分]
 
-Company:
-Ticker:
-Market: A-share (SSE / SZSE / STAR / BSE)
-Layer:
-Plain-language role:
+## S4. 细分领域深度分析
 
-## Evidence
+每个细分领域 4-6 只标的，覆盖 10-100 / 1-10 / 0-1 三个成熟度阶段。评级来自
+`scripts/serenity_scorecard.py`。A 股标的额外检查问询函/质押/关联交易/减持。
 
-| Evidence | Source | Strength | What it supports | What still needs checking |
+### 细分领域 1：[名称]（[核心材料/技术]）
+
+[该细分领域的技术壁垒、市场格局、关键变化]
+
+| 公司 | 代码 | 阶段 | 核心定位 | 关键证据 | 评级 | 备注 |
+|---|---|---|---|---|---|---|
+| [公司名] | [代码] | 10-100 | [一句话定位] | ①[证据1]；②[证据2]；③[证据3] | S级 | [稀缺原因] |
+| [公司名] | [代码] | 1-10 | [一句话定位] | ①[证据1]；②[证据2] | A级 | [弹性大] |
+| [公司名] | [代码] | 0-1 | [一句话定位] | ①[证据1]；②待验证 | C级 | [关注进展] |
+
+覆盖 [N] 家。[该细分领域的关键判断]
+
+#### A-share-specific risk checks（仅 A 股标的填写）
+
+对每个 A 股公司补充以下检查（数据来自公告/互动易/交易所文件）：
+
+**[公司名]（[代码]）**
+
+- 问询函（24 个月内）：[有/无，主题，是否已回复]
+- 股权质押：[控股股东质押率 X%，实控人质押率 Y%，当前价格平仓风险]
+- 关联交易：[关联交易占营收 X%，定价是否公允，是否依赖关联方]
+- 大股东减持（12 个月内）：[有/无，减持计划披露]
+- 限售解禁：[解禁时间表，解禁比例]
+- 商誉/净资产：[X%]
+- 研发资本化比例：[X%]
+- 政府补贴/利润：[X%]
+
+### 细分领域 2..N
+
+[按上述格式逐领域展开，通常 6-8 个细分领域]
+
+## S5. 重要更正：伪标的排查
+
+以下公司近期被"[产业链]"概念炒作推高股价，但实际并非核心标的。
+
+| 公司 | 代码 | 主营业务 | 与产业链的实际关系 | 公司澄清/核实来源 |
 |---|---|---|---|---|
+| [公司名] | [代码] | [主营业务] | 零关系 [说明] | 公司公告（[日期]）："[澄清原文]" |
 
-## What the market may be missing
+## S6. 投资优先级总排序
 
-Current market category:
+从 [N] 家候选池中，结合稀缺性/产业卡位/证据质量/估值压力/风险五个维度
+缩圈至 Top N。评级来自 `scripts/serenity_scorecard.py`：S=Top research
+priority(≥85), A=High research priority(≥70), B=Worth tracking(≥55),
+C=Early lead(<55)。
 
-Possible new category:
+| # | 公司 | 代码 | 卡住环节 | 链位置 | 排序原因 | 评级 | 最大风险 |
+|---|---|---|---|---|---|---|---|
+| 1 | [公司名] | [代码] | [具体卡点] | [L编号] | [为什么排这个位置] | S级 | [最大风险] |
+| 2 | [公司名] | [代码] | [具体卡点] | [L编号] | [排序原因] | S级 | [最大风险] |
+| 3 | [公司名] | [代码] | [具体卡点] | [L编号] | [排序原因] | S级 | [最大风险] |
+| ... | | | | | | | |
 
-Why investors may be slow:
+### 估值快照（Top 标的）
 
-## Financial quality
+| 公司 | 代码 | P/E | P/S | 市值 | 52周区间 | 当前价可能误判稀缺层的理由 |
+|---|---|---|---|---|---|---|
+| [公司名] | [代码] | [X] | [X] | [X亿] | [低-高] | [为什么市场定错了价] |
 
-Revenue mix:
+## S7. 市场可能没看清的关键认知
 
-Gross margin:
-
-Cash flow:
-
-Capex need:
-
-Financing risk:
-
-Customer concentration:
-
-Inventory/receivables:
-
-## A-share-specific risk checks
-
-### 问询函 (Inquiry letters)
-
-Has the company received inquiry letters in the past 24 months?
-
-If yes, what was the topic and was it resolved?
-
-### 股权质押 (Share pledges)
-
-Pledge ratio of controlling shareholder:
-
-Pledge ratio of actual controller:
-
-Risk of forced liquidation at current price:
-
-### 关联交易 (Connected transactions)
-
-Connected transaction ratio (% of revenue):
-
-Pricing fairness:
-
-Is revenue dependent on related parties?
-
-### 大股东减持 (Major shareholder reduction)
-
-Major shareholder reduction in past 12 months:
-
-Reduction plan disclosed:
-
-### 其他 A-share 信号
-
-限售解禁时间表 (Lock-up expiry schedule):
-
-商誉占净资产比 (Goodwill / net assets):
-
-研发资本化比例 (R&D capitalization ratio):
-
-政府补贴占利润比 (Government subsidies / profit):
-
-## Valuation snapshot
-
-Current P/E:
-
-P/S:
-
-Market cap:
-
-52-week range:
-
-Why the current price may misjudge the scarce layer:
-
-## What could make the market reprice it
-
-| Event | Expected window | Evidence to monitor | Confidence |
+| # | 市场共识 | 可能没看清的地方 | 受益标的 |
 |---|---|---|---|
+| 1 | [市场普遍看法] | [与市场共识不同的深度判断] | [受益公司] |
+| 2 | [市场普遍看法] | [与市场共识不同的深度判断] | [受益公司] |
+| 3 | [市场普遍看法] | [与市场共识不同的深度判断] | [受益公司] |
+| 4 | [市场普遍看法] | [与市场共识不同的深度判断] | [受益公司] |
 
-## What could weaken the view
+## S8. 什么情况说明这个判断错了
 
-1.
-2.
-3.
+每条风险包含：等级、触发条件、跟踪指标、最大受伤标的。
 
-## Next research actions
+| 等级 | 风险 | 触发条件 | 跟踪指标 | 最大受伤标的 |
+|---|---|---|---|---|
+| 致命 | [风险1] | [触发条件] | [跟踪指标] | [受冲击公司] |
+| 致命 | [风险2] | [触发条件] | [跟踪指标] | [受冲击公司] |
+| 严重 | [风险3] | [触发条件] | [跟踪指标] | [受冲击公司] |
+| 严重 | [风险4] | [触发条件] | [跟踪指标] | [受冲击公司] |
+| 注意 | [风险5] | [触发条件] | [跟踪指标] | [受冲击公司] |
+| 注意 | [风险6] | [触发条件] | [跟踪指标] | [受冲击公司] |
 
-1.
-2.
-3.
-4.
-5.
+## S9. 下一步研究建议
+
+| # | 待验证事项 | 验证方法 | 重要性 |
+|---|---|---|---|
+| 1 | [验证事项] | [查什么文件/数据/公告] | P1 关键 |
+| 2 | [验证事项] | [验证方法] | P1 关键 |
+| 3 | [验证事项] | [验证方法] | P1 关键 |
+| 4 | [验证事项] | [验证方法] | P1 关键 |
+| 5 | [验证事项] | [验证方法] | P2 重要 |
+| 6 | [验证事项] | [验证方法] | P2 重要 |
+| 7 | [验证事项] | [验证方法] | P2 重要 |
+| 8 | [验证事项] | [验证方法] | P2 重要 |
+
+## S10. 交叉验证方法论 & 数据可信度
+
+### 本次研究的数据源层级
+
+| 数据层级 | 来源 | 条数 | 可信度 |
+|---|---|---|---|
+| 一级：官方财报/公告 | [来源说明] | [数量] | 高 |
+| 二级：交易所/监管文件 | [来源说明] | [数量] | 高 |
+| 三级：权威行业数据 | [来源说明] | [数量] | 高 |
+| 四级：券商研报 | [来源说明] | [数量] | 中高 |
+| 五级：财经媒体 | [来源说明] | [数量] | 中 |
+| 六级：投资社区 | [来源说明]（作为线索，不作为直接证据） | [数量] | 低（仅参考） |
+| 七级：量价关系 | [价格/成交量异动说明]（无基本面支撑的纯价格行为） | [数量] | 低（仅线索） |
+
+### 关键数据点交叉验证
+
+| 数据点 | 来源A | 来源B | 来源C | 一致性 |
+|---|---|---|---|---|
+| [数据点] | [来源A及数值] | [来源B及数值] | [来源C及数值] | 一致 |
+
+交叉验证结论：[总体可信度判断]
 
 ## A-share source checklist
 

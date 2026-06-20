@@ -72,7 +72,7 @@ Research support only. User makes trading decisions. Avoid: guaranteed returns, 
 - Value-chain completeness: run the 7-point self-check from `references/deep-research-workflow.md` Step 3 before outputting the chain map. Output the completeness declaration.
 - Company rating: use `scripts/serenity_scorecard.py` verdict only. Do not invent rating systems (no ALPHA/BETA/S+ etc.). The 4 valid verdicts are: Top research priority, High research priority, Worth tracking, Early lead or low priority.
 - Candidate pool breadth: execute all 6 discovery methods from `references/company-universe-build.md` Step 5.1 for each layer — especially Method 2 (industry classification codes) and Method 3 (supply-chain reverse lookup). Do not rely on memory or single-source search. Gate 2 requires 4-6 companies per scarce layer across at least 2 maturity stages. If a sector has fewer than 4 listed companies, state "Limited universe" and list all available.
-- Report language: use the user's language. The HTML template uses language-neutral placeholders ({{s0_title}}, {{toc_title}}, etc.) — fill them in the user's language.
+- Report language: use the user's language. The HTML template uses language-neutral placeholders ({{s1_title}}, {{toc_title}}, etc.) — fill them in the user's language.
 
 ## Load on demand
 
@@ -81,5 +81,7 @@ References: `references/deep-research-workflow.md`, `references/scarcity-assessm
 Assets: `assets/thesis-template.md`, `assets/thesis-template-a-share.md`, `assets/serenity-report-template.html`, `assets/bottleneck-scorecard.json`, `assets/research-prompt-pack.md`.
 
 Template usage: use `thesis-template.md` (or `thesis-template-a-share.md` for A-share) as the Markdown skeleton when the user asks for a structured memo. Use `serenity-report-template.html` when the user asks for a visual or HTML report. The two formats do not conflict — Markdown skeleton structures the content; HTML template renders it.
+
+Template timing: templates are presentation tools for Step 8 of `references/deep-research-workflow.md`, not research drivers. Do NOT use a template to decide what to research. Complete Step 1 (scope) → Step 3 (value-chain map + 7-point self-check) → Step 4 (9-indicator scarcity assessment) → Step 5 (company universe, 6 discovery methods) → Step 7 (ranking) first. Only then use the template to render the results. If the user asks for a report before the research is done, say so and run the research workflow first.
 
 Scripts: `scripts/serenity_scorecard.py`, `scripts/validate_skill.py`, `scripts/trigger_eval.py`.
